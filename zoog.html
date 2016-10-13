@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    
+    <script>
+        function setup() {
+            //setup
+            createCanvas(500,500)
+            
+            //blue cape
+            fill(69,55,225)
+            stroke(69,100,225,10)
+            bezier(100,350,180,100,321,100,410,350)// makes a cape with 6 coords
+            
+            //orange head
+            fill(244, 155, 66)
+            stroke(244, 155, 66)
+            ellipse(250,100,220,120)
+            
+            //yellow rectangle body
+            stroke(219, 173, 48)
+            fill(219, 173, 48)
+            rect(180,160,140,150)
+            
+            //rectangle inside head containing eyes
+            strokeWeight(3)
+            fill(206, 183, 125)
+            stroke(200)
+            rect(186,75,120,50)
+            
+            //blue eyes
+            fill(42, 0, 255)
+            stroke(42, 0, 255)
+            ellipse(215,100,18,35)
+            ellipse(275,100,18,35)
+            
+            //bottom part of the boy(orange)
+            stroke(219, 173, 48)
+            strokeWeight(1)
+            fill(219, 173, 48)
+            arc(250.5,310,139.5,200,0,PI)// this makes a semi-circle
+            
+            //text and text box
+            fill(0)
+            stroke(0)
+            rect(195,210,110,50)
+            textSize(45)
+            stroke(0)
+            fill(255)
+            text("Hello",200,250,300)
+            
+            //lines by each side of the head
+            strokeWeight(5)
+            stroke(10,30,169,69)
+            line(165,63,165,136)
+            line(334,63,334,136)
+            
+            //yellow hands surround by a lighter yellow layer, left and right hand
+            stroke(240,255,0,5009)
+            strokeWeight(10,100)
+            fill(239,244,90,500)
+            ellipse(145,175,50,50)
+            ellipse(360,175,50,50)
+
+            
+        }
+
+        function draw() {
+            
+        }
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/Jeffreyg2240/p5js/blob/gh-pages/zoog.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
