@@ -54,7 +54,7 @@
                 r1 = r1+10;
                 g1 = g1-10;
                 b1 = b1+10;
-                stroke(r,g,b);
+                stroke(r,g,b,150);
             }
             
             if(keyIsDown(RIGHT_ARROW)){
@@ -80,11 +80,11 @@
                 r1 = r1-10;
                 g1 = g1+10;
                 b1 = b1-10;
-                stroke(r,g,b);
+                stroke(r,g,b,150);
             }
             if(keyIsDown(DOWN_ARROW)){
                 
-                //color and thickness of the line
+                //color of the circle and thickness of the line
                 fill(r1, g1, b1);
                 strokeWeight(1*scale)
                 y+=5;//Moving the circle and lines
@@ -102,7 +102,7 @@
                 r1 = r1+10;
                 g1 = g1-10;
                 b1 = b1-10;
-                stroke(r,g,b);
+                stroke(r,g,b,150);
             }
             
             if(keyIsDown(UP_ARROW)){ 
@@ -125,7 +125,7 @@
                 r1 = r1-10;
                 g1 = g1+10;
                 b1 = b1+10;
-                stroke(r,g,b);
+                stroke(r,g,b,150);
             }
             //keeping the color at out of white or black
             if (r=255){
@@ -149,7 +149,7 @@
             //draws at square on where the cursor is on
             if(key==='r'){
                 rect(mouseX,mouseY,50*scale,50*scale)
-                stroke(r,g,b);
+                stroke(r,g,b,200);
             }
             
             strokeWeight(1);
