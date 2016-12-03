@@ -40,9 +40,6 @@
             text("Player 2 Presses Right arrow",100, 400);
             textSize(45);
             text("Click Space to start and to play again!",0,300);
-            
-            //So the the "space" key wouldn't drag the page down
-            return false;
         }
 
         function draw() {
@@ -175,6 +172,8 @@
                     
                     //Sets time to a random time each from 2-6 seconds after space is clicked 
                     time=millis()+random(2000,6000);
+                    //So the the "space" key wouldn't drag the page down
+                    return false;
 
                 }
             }
