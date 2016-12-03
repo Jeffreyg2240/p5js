@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    
+    <script>
+        var image1, image2, image3;
+        var img1, img2, img3;
+        //For true and false statments
+        var con;
+        //time is the random 
+        var time;
+        //Allow the presidental mode to toggle on
+        var pres;
+        function preload(){
+            
+            //Load the 6 images
+            image1 =loadImage('Clinton.jpg');
+            image2 = loadImage('TT.jpg');
+            image3 = loadImage('LesterHolt.jpg');
+            img1 = loadImage('Doge');
+            img2 = loadImage('Nyan');
+            img3 = loadImage('Troll.png');
+        }
+        
+        function setup() {
+            pres=false;
+            //Condition to show if space is clicked
+            con=false;
+            
+            createCanvas(750,600);
+            textSize(30);
+            
+            //sky blue
+            background(100,150,200);
+            
+            //Text to show how to play the game
+            text("Click 'S' special mode, and 'R' for regular",200,50)
+            text("Player 1 Presses Left arrow.", 100,120);
+            text("Player 2 Presses Right arrow",100, 400);
+            textSize(45);
+            text("Click Space to start and to play again!",0,300);
+        }
+
+        function draw() {
+            if(con==true){//If space is clicked
+                if(pres==true){
+                    //If time is greater than 
+                    if(millis()>=time){
+                        textSize(100);
+                        background(0,255,0);
+                        text("Go!",320,250);
+                        textSize(69);
+                    
+                        if(keyIsDown(RIGHT_ARROW)){//player 2's key, Right arrow
+                            
+                            //creates a background of the image
+                            background(image1);
+                            text("Player 2 Wins!",200,300);
+                            textSize(25);
+                        
+                            con=false;//ends the code, until space is clicked again
+                        }
+                        if(keyIsDown(LEFT_ARROW)){//player 1's key, Left arrow
+                        
+                            //creates a background of the image
+                            background(image2);
+                            text("Player 1 Wins!",200,300);
+                            
+                            con=false;//ends the code, until space is clicked again
+                        }
+                    
+                    }if(millis()<=time){
+                        textSize(40);
+                        if(keyIsDown(RIGHT_ARROW)){
+                            
+                            //makes text blue
+                            fill(255,0,0)
+                            stroke(255,0,0)
+                            
+                            //creates a background of the image
+                            background(image3);
+                            text("Player 2 Jumped The Gun!",100,300);
+                            
+                            con=false;//ends the code, until space is clicked again
+                        }else if(keyIsDown(LEFT_ARROW)){
+                        
+                            //makes text blue
+                            fill(0,0,255)
+                            stroke(0,0,255);
+                            background(image3);//creates a background of the image
+                            text("Player 1 Jumped The Gun!",100,300);
+                            
+                            con=false;//ends the code, until space is clicked again
+                        }
+                    }
+                    
+                }else{
+                    //If time is greater than 
+                    if(millis()>=time){
+                        textSize(100);
+                        background(0,255,0);
+                        text("Go!",320,250);
+                        textSize(69);
+                    
+                        if(keyIsDown(RIGHT_ARROW)){//player 2's key, Right arrow
+                            
+                            //creates a background of the image
+                            background(img1);
+                            text("Player 2 Wins!",200,300);
+                            textSize(25);
+                        
+                            con=false;//ends the code, until space is clicked again
+                        }
+                        if(keyIsDown(LEFT_ARROW)){//player 1's key, Left arrow
+                        
+                            //creates a background of the image
+                            background(img2);
+                            text("Player 1 Wins!",200,300);
+                            
+                            con=false;//ends the code, until space is clicked again
+                        }
+                    
+                    }if(millis()<=time){
+                        textSize(40);
+                        if(keyIsDown(RIGHT_ARROW)){
+                            
+                            //makes text blue
+                            fill(255,0,0)
+                            stroke(255,0,0)
+                            
+                            //creates a background of the image
+                            background(img3);
+                            text("Player 2 Jumped The Gun!",100,300);
+                            
+                            con=false;//ends the code, until space is clicked again
+                        }else if(keyIsDown(LEFT_ARROW)){
+                        
+                            //makes text blue
+                            fill(0,0,255)
+                            stroke(0,0,255);
+                            background(img3);//creates a background of the image
+                            text("Player 1 Jumped The Gun!",100,300);
+                            
+                            con=false;//ends the code, until space is clicked again
+                        }
+                    }
+                  
+                    
+                }
+            }
+        }
+             
+        function keyPressed(){
+            if(key=="s"|| key=="S"){
+                pres=true;
+            }else if(key=="r" || key=="R"){
+                pres=false;
+            }
+            if(con==false){//Con starts false, to make the code repeat
+                
+                //If space is clicked
+                if(keyCode == 32){
+                    textSize(130);
+                    background(200);
+                    fill(0)
+                    stroke(0)
+                    text("Wait...", 200,height/2); 
+                    
+                    //Set the setup function to ture, to start the LEFT and RIGHT arrow 
+                    con=true;
+                    
+                    //Sets time to a random time each from 2-6 seconds after space is clicked 
+                    time=millis()+random(2000,6000);
+
+                }
+            }
+        }
+    
+    </script>
+</head>
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/jeffreyg2240/p5js/blob/gh-pages/ReactionTime.html?footer=0"></script>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+</html>
