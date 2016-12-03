@@ -14,26 +14,17 @@
         var time;
         //Allow the presidental mode to toggle on
         var pres;
-
+        //function preload(){
             
             //Load the 6 images
-        loadImage('gh-pages/Clinton.jpg');
-        loadImage('gh-pages/TT.jpg');
-        loadImage('gh-pages/LesterHolt.jpg');
-        loadImage('gh-pages/Doge');
-        loadImage('gh-pages/Nyan');
-        loadImage('gh-pages/Troll.png');  
-        function preload(){
-                        //Load the 6 images
-  
-            image1 = loadImage('gh-pages/Clinton.jpg');
+            image1 =loadImage('gh-pages/Clinton.jpg');
             image2 = loadImage('gh-pages/TT.jpg');
             image3 = loadImage('gh-pages/LesterHolt.jpg');
             img1 = loadImage('gh-pages/Doge');
             img2 = loadImage('gh-pages/Nyan');
-            img3 = loadImage('gh-pages/Troll.png');  
-        }
-
+            img3 = loadImage('gh-pages/Troll.png');
+        //}
+        
         function setup() {
             pres=false;
             //Condition to show if space is clicked
@@ -183,6 +174,7 @@
                     
                     //Sets time to a random time each from 2-6 seconds after space is clicked 
                     time=millis()+random(2000,6000);
+
                 }
             }
         }
