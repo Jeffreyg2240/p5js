@@ -14,23 +14,16 @@
         var time;
         //Allow the presidental mode to toggle on
         var pres; 
-        //function preload(){
-            //Load the 6 images
-//             image1 = loadImage('Clinton.jpg');
-//             image2 = loadImage('TT.jpg');
-//             image3 = loadImage('LesterHolt.jpg');
-//             img1 = loadImage('Doge');
-//             img2 = loadImage('Nyan');
-//             img3 = loadImage('Troll.png');
-        //}
-        
+
         function setup() {
+            //loads the 6 images
             image1 = loadImage('Clinton.jpg');
             image2 = loadImage('TT.jpg');
             image3 = loadImage('LesterHolt.jpg');
             img1 = loadImage('Doge');
             img2 = loadImage('Nyan');
             img3 = loadImage('Troll.png'); 
+            
             pres=false;
             //Condition to show if space is clicked
             con=false;
@@ -47,6 +40,9 @@
             text("Player 2 Presses Right arrow",100, 400);
             textSize(45);
             text("Click Space to start and to play again!",0,300);
+            
+            //So the the "space" key wouldn't drag the page down
+            return false;
         }
 
         function draw() {
