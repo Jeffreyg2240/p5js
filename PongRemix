@@ -194,7 +194,7 @@
                 con2=false;
                 sz = 0;
                 //Score of the game
-                s=51;
+                s=0;
                 //width of paddle
                 paddleWidth = 200;
                 //lets ball spawn in random location
