@@ -85,21 +85,26 @@
                     ballSpeedY = ballSpeedY * -1;
                     sz+=3;
                     if(Ts==true){
-                        s+=3
-                    }
-                if(s==30){
-                    textSize(30);
-                    fill(40);
-                    s+=3;
-                    fill(255);
-                    text("TRIPLE SCORE!", 300,300);
-                    }else if(s<30){
+                        //score has to be over 21
+                        if(s==21 || s == 24){
+                            textSize(30);
+                            fill(40);
+                            //score increases by 3
+                            s+=3;
+                            fill(255);
+                            text("TRIPLE SCORE!", 300,300);
+                        }
+                        s+=3;
+                    }else{
+                        //inceases score by one
                         s++;
                     }
+                // if the ball hits the bottom of the canvas instead of the board
                 }else{
                     life(-1);
                     reset();
                 }
+                
             }
         }
         
@@ -141,24 +146,23 @@
             if(s<45 && s>55){
                 con2=false;
             }
-            //set a condition true that slows the ball by half 
+            //sets ts to activation, so the score triples
             if(con2==false){
-                if(s == 30){
+                if(s == 21){
                     Ts=true;
                     con2=true
-                //makes paddle 120 pixels wider longer
                 }
+                //makes paddle 120 pixels wider longer
                 if(s == 45){
                     paddleWidth+=60;
                     con2=true
-                //adds 2 life
                 }
+                //adds 2 life
                 if(s == 15){
                     life(2);
                     con2=true;
                 }
             }
-            
         }
         //puts the ball in a random location
         function reset(){
@@ -188,7 +192,7 @@
             if(con==false){
                 c1=0;
                 c2=255;
-                Ts = true;
+                Ts = false;
                 //sets life to 3
                 lives = 3;
                 con2=false;
