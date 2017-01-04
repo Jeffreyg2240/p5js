@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>Pong</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
+    <script>
+        var ballX;
+        var ballY;
+        var ballSpeedX = 5;// speed of the ball vertically
+        var ballSpeedY = 5;// speed of the ball vertically
+        var paddleHeight = 30;
+        var paddleWidth = 200;//length of paddle
+        var con = false;
+        var con2;
+        var s, sz;
+        var lives;
+        var condition1;
+        var max_distance;
+        var c1,c2, Ts;
+
+        function setup() {
+            createCanvas(800,600);
+            //gray background
+            textSize(20);
+            background(128);
+            text("Click mouse to start, and also to restart the gane once you won or lost.", 0,350);
+            text("You start with 3 lives and the game get progressivly harder, as in the paddle gets shorter and ball gets faster, and graphics change, to try to trip your brain. Your goal is to reach 69 score, there are power-ups throughout the game to make the game easlier or quicker.",20,20,400,400)
+            //Removes Mouse pointer
+            noCursor();
+            max_distance = dist(100, 75, 400, 500); // is used later to help control the circl's orbit
+        }
+
+        function draw() {
+            // so the game runs smoothly
+            // frameRate(1000);
+            // so paddle doesn't move over the canvas
+            mouseX=constrain(mouseX,0,width-paddleWidth+sz);
+            // so the size of the paddle does not go lower than 30
+            sz = constrain(sz,0,35)
+            if(con==true){
+                fill(0);
+                // if you didn't lose all your lives yet, then the game will keep running
+                if(lives!=0){
+                    // background(128); // keep background gray 
+                    drawBall();
+                    drawPaddle();
+                    moveBall();
+                    checkCollide();
+                    CScore();//texts score in top left corner
+                    remixes(); 
+                }else{
+                    //if the amount of lives you have reaches 0
+                    con=false;
+                    fill(0);
+                    textSize(50);
+                    background(255,0,0);//red background
+                    text("GAME OVER!", width / 3, height / 2);
+                    
+                }
+            }
+        }
+
+        function moveBall() {
+            // ball moves according to it's speed
+            ballX = ballX + ballSpeedX;
+            ballY = ballY + ballSpeedY;
+            //check console for the speed of the ball
+            console.log("ballSpeedX: " + ballSpeedX + 
+                        ", ballSpeedY: " + ballSpeedY);
+        }
+
+        function checkCollide() {
+            // To make the ball bounce off the right and left side of the canvas
+            if (ballX < 0 || ballX > width) {
+                ballSpeedX = ballSpeedX * -1;
+            }
+            //so the ball bounce off the top of the canvas
+            if (ballY < 0) {
+                ballSpeedY = ballSpeedY * -1;
+            }
+            // if the ball passes the paddle height 
+            if (ballY > height - paddleHeight-10) {
+                if (ballX >= mouseX && ballX <= mouseX + paddleWidth-sz) {
+                    ballSpeedY = ballSpeedY * -1;
+                    sz+=3;
+                    if(Ts==true){
+                        s+=3
+                    }
+                if(s==30){
+                    textSize(30);
+                    fill(40);
+                    s+=3;
+                    fill(255);
+                    text("TRIPLE SCORE!", 300,300);
+                    }else if(s<30){
+                        s++;
+                    }
+                }else{
+                    life(-1);
+                    reset();
+                }
+            }
+        }
+        
+
+        function drawBall() {
+            noStroke();
+            //sets it so the background is constantly changing depending on loctaion of the ball in attempt to suprise or trick the player.
+            background(c1);//black background
+            noStroke();
+            fill(c2);//white ball for the first 60 score
+            for(var x = 0; x <= width; x += 20) {
+                for(var y = 0; y <= height; y += 20) {
+                    var size = dist(ballX, ballY, x, y);
+                    size = size/max_distance * 60;
+                    ellipse(x, y, size, size);
+                }
+            }
+            // from 60 to the end, the color will reverse
+            if(s==60){
+                c1 = 255;
+                c2 = 0
+            }
+            
+        }
+
+        function drawPaddle() {
+            strokeWeight(4);//thickness of paddle
+            fill(0,0,255);//blue paddle
+            rect(mouseX, height - paddleHeight - 4, paddleWidth-(sz+2), paddleHeight);
+        }
+        function remixes(){
+            // To Re-activite the functions for the remixes
+            if(s<15 && s>25){
+                con2=false;
+            }
+            if(s<30 && s>40){
+                con2=false;
+            }
+            if(s<45 && s>55){
+                con2=false;
+            }
+            //set a condition true that slows the ball by half 
+            if(con2==false){
+                if(s == 30){
+                    Ts=true;
+                    con2=true
+                //makes paddle 120 pixels wider longer
+                }
+                if(s == 45){
+                    paddleWidth+=60;
+                    con2=true
+                //adds 2 life
+                }
+                if(s == 15){
+                    life(2);
+                    con2=true;
+                }
+            }
+            
+        }
+        //puts the ball in a random location
+        function reset(){
+            ballX = random(50,width-50);//random x coord from 50 to 750
+            ballY = random(50,height-300);//random y coord from 50 to 300
+        }
+        function life(a){
+            //adds of subtracts lives from the player
+            lives+=(a);
+        }
+                // Keeps track of the score and number of lives in the top left corner
+        function CScore(){
+            textSize(20)
+            text("Score: " + s, 20,20);
+            text("Life :" + lives, 20,40);
+            // If the player reaches a score of 69, the game ends, until mouse is clicked again.
+            if(s>=69){
+                con=false;
+                background(0,255,0);//green background
+                textSize(50);
+                Ts=false;
+                text("You win!!", width / 3, height / 2);
+            }
+        }
+        function mousePressed(){
+            //resets the game 
+            if(con==false){
+                c1=0;
+                c2=255;
+                Ts = true;
+                //sets life to 3
+                lives = 3;
+                con2=false;
+                sz = 0;
+                //Score of the game
+                s=51;
+                //width of paddle
+                paddleWidth = 200;
+                //lets ball spawn in random location
+                ballX = random(50,width-50);
+                ballY = random(50,height-300);
+                ballSpeedX = 5;
+                ballSpeedY = 5;
+                //Activate another condition
+                con = true;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/jeffreyg2240/p5js/blob/gh-pages/Pong.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas').remove());
+        });
+    </script>
+</body>
+</html>
