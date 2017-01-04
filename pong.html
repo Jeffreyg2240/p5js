@@ -5,6 +5,7 @@
     <title>Pong</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.13/p5.js"></script>
     <script>
+        var slider, slider2, slider3;
         var ballX;
         var ballY;
         var ballSpeedX = 5;// speed of the ball vertically
@@ -21,6 +22,15 @@
 
         function setup() {
             createCanvas(800,600);
+            // slider = createSlider(0, 360, 60, 40);
+            // slider.position(10, 10);
+            // slider.style('width', '80px');
+            // slider2 = createSlider(0, 360, 60, 40);
+            // slider2.position(10, 25);
+            // slider2.style('width', '80px');
+            // slider3 = createSlider(0, 360, 60, 40);
+            // slider3.position(10, 40);
+            // slider3.style('width', '80px');
             //gray background
             textSize(20);
             background(128);
@@ -46,9 +56,9 @@
                     drawBall();
                     drawPaddle();
                     moveBall();
-                    checkCollide();
                     CScore();//texts score in top left corner
                     remixes(); 
+                    checkCollide();
                 }else{
                     //if the amount of lives you have reaches 0
                     con=false;
@@ -86,16 +96,8 @@
                     sz+=3;
                     if(Ts==true){
                         //score has to be over 21
-                        if(s==21 || s == 24){
-                            textSize(30);
-                            fill(40);
-                            //score increases by 3
-                            s+=3;
-                            fill(255);
-                            text("TRIPLE SCORE!", 300,300);
-                        }
                         s+=3;
-                    }else{
+                    }else if (s<21){
                         //inceases score by one
                         s++;
                     }
@@ -104,7 +106,12 @@
                     life(-1);
                     reset();
                 }
-                
+            }
+            if(s==21){
+                textSize(30);
+                fill(0,255,0);
+                //score increases by 3
+                text("TRIPLE SCORE!", 300,300);
             }
         }
         
@@ -198,7 +205,7 @@
                 con2=false;
                 sz = 0;
                 //Score of the game
-                s=0;
+                s=20;
                 //width of paddle
                 paddleWidth = 200;
                 //lets ball spawn in random location
@@ -214,7 +221,7 @@
 </head>
 <body>
     <div id="code" class="container-fluid">
-        <script src="https://gist-it.appspot.com/github/jeffreyg2240/p5js/blob/gh-pages/pong.html?footer=0"></script>
+        <script src="https://gist-it.appspot.com/github/jeffreyg2240/p5js/blob/gh-pages/Pong.html?footer=0"></script>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
