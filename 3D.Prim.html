@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    <font color = red>
+    <h2>Click "E" to start to pick and size your shape! Thus clicking "R" can resize the canvas! The code will break off mid way if you don't follow the prompt's instructions</h2>
+    </font>
+<head>    
+    <script>
+    var shape=["cone","sphere","cube","cylinder"];
+    var question1, question2, question3, question4,question5;
+    var canvas_w;
+    var canvas_h;
+    var orb = true;
+    var self = true;
+    var switch1 = false;
+    var cube = false;
+    var cone1 = false;
+    var sphere1 = false;
+    var cylinder1 = false;
+    var expand=0;
+        function setup() {
+            askCanvas();
+            createCanvas(canvas_w,canvas_h,WEBGL);
+            background(255);
+        }
+
+        function draw() {
+            question();
+            if(switch1==false){
+                if(orb==true){
+                    orbitControl();
+                }
+                if(self==true){
+                    rotateZ(frameCount * 0.02);
+                    rotateX(frameCount * 0.02);
+                    rotateY(frameCount * 0.02);
+                }
+                if(sphere1 == true){
+                    SphereC();
+                }else if(cylinder == true){
+                    CylinderC();
+                }else if(cone1==true){
+                    ConeC();
+                }else if(cube==true){
+                    CubeC();
+                }
+            }
+        }
+        function question(){
+            if(switch1==true){
+                //Asking user what shape they would like to make
+                question1 = prompt("Which shape would you like to create? (cube, sphere, cone, cylinder)");
+                //When the shape is a cone
+                if(question1.toLowerCase()== shape[0]){
+                    //askes for radius of the cone
+                    question2 = prompt("What would you like the radius(not diameter) of the your shape to be?");
+                    //if the raidus of the cone isn't a interger
+                    if(isNaN(question2) || question2 ==" " || question2 =="  "|| question2 =="   "){
+                        alert("ERROR! Inserted Variable isn't a text.");
+                        switch1=false;//Ends game
+                    //if the raidus of the cone is too large to fit the screen
+                    }else if(question2>=(canvas_w/2)-canvas_w/9){
+                        alert("ERROR! The raidus of the your shape is too large!");
+                        question2=0;//prevents canvas from crashing
+                        switch1 = false;//Ends game
+                    }else{
+                        if(switch1==true){
+                            question3 = prompt("What would you like the height of the your shape to be?");
+                            if(isNaN(question3) || question3==" " || question3=="  "|| question3=="   "){
+                                alert("ERROR! Inserted Variable isn't a text.")
+                                switch1=false;//Ends game
+                            }else if(question3>=(canvas_h/2)-canvas_h/9){
+                                alert("ERROR! The height of the your shape is too large!");
+                                question3=0;//prevents canvas from crashing
+                                switch1 = false;//Ends game
+                            }else{
+                                question4 = confirm("Would you like the shapes to rotate by themselves or for you to control them?(Cancel for self rotate; Ok for computer rotates for you)")
+                                if(question4 == true){
+                                    self = false;//Rotates without user 
+                                    cone1 = true;//Creates cone
+                                    switch1 = false;//Ends game
+                                }else if(question4 == false){
+                                    orb = false;//user uses mouse to rotate
+                                    cone1 = true;//creates cone
+                                    switch1 = false;//Ends game
+                                }
+                            }
+                        }
+                    }
+                }else if(question1.toLowerCase()== shape[1]){
+                //When the shape is a sphere
+                    question2 = prompt("What would you like the radius(not diameter) of the your shape to be?");
+                    //if the raidus of the sphere isn't a interger
+                    if(isNaN(question2) || question2 ==" " || question2 =="  "|| question2 =="   "){
+                        alert("ERROR! Inserted Variable isn't a text.");
+                        switch1=false;//Ends game
+                    //if the raidus of the cone is too large to fit the screen
+                    }else if(question2>=(canvas_w/2)-canvas_w/9){
+                        alert("ERROR! The raidus of the your shape is too large!");
+                        question2=0;//prevents canvas from crashing
+                        switch1 = false;//Ends game
+                    }else{
+                        question4 = confirm("Would you like the shapes to rotate by themselves or for you to control them?(Cancel for self rotate; Ok for computer rotates for you)")
+                        if(question4 == true){
+                            self = false;//Rotates without user 
+                            sphere1 = true;//Creates sphere
+                            switch1 = false;//Ends game
+                        }else if(question4 == false){
+                            orb = false;//user uses mouse to rotate
+                            sphere1 = true;//creates sphere 
+                            switch1 = false;//Ends game
+                        }
+                    }
+                //When the shape is a cone
+                }else if(question1.toLowerCase()== shape[2]){
+                    //asks for width of the cone
+                    question2 = prompt("What would you like the width of the shape to be?");
+                    //if the width of the cube isn't a interger
+                    if(isNaN(question2) || question2 ==" " || question2 =="  "|| question2 =="   "){
+                        alert("ERROR! Inserted Variable isn't a text.");
+                        switch1=false;//Ends game
+                    //if the width of the box is too large to fit the screen
+                    }else if(question2>=(canvas_w/2)-canvas_w/9){
+                        alert("ERROR! The raidus of the your shape is too large!");
+                        question2=0;//prevents canvas from crashing
+                        switch1 = false;//Ends game
+                    }else{
+                        if(switch1==true){
+                            question3 = prompt("What would you like the height of the your shape to be?");
+                            if(isNaN(question3) || question3==" " || question3=="  "|| question3=="   "){
+                                alert("ERROR! Inserted Variable isn't a text.")
+                                switch1=false;//Ends game
+                            }else if(question3>=(canvas_h/2)-canvas_h/9){
+                                alert("ERROR! The height of the your shape is too large!");
+                                question3=0;//prevents canvas from crashing
+                                switch1 = false;//Ends game
+                            }else{
+                                question5 = prompt("What would you like the depth of the your shape to be?");
+                                if(isNaN(question5) || question5==" " || question5=="  "|| question5=="   "){
+                                    alert("ERROR! Inserted Variable isn't a text.")
+                                    switch1=false;//Ends game
+                                }else if(question5>=(canvas_h/2)-canvas_h/9){
+                                    alert("ERROR! The height of the your shape is too large!");
+                                    question5=0;//prevents canvas from crashing
+                                    switch1 = false;//Ends game
+                                }else{
+                                    question4 = confirm("Would you like the shapes to rotate by themselves or for you to control them?(Cancel for self rotate; Ok for computer rotates for you)")                                    
+                                    if(question4 == true){
+                                        self = false;//Rotates without user 
+                                        cube = true;//Creates cube
+                                        switch1 = false;//Ends game
+                                    }else if(question4 == false){
+                                        orb = false;//user uses mouse to rotate
+                                        cube = true;//creates cube
+                                        switch1 = false;//Ends game                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if(question1.toLowerCase()== shape[3]){
+                    question2 = prompt("What would you like the radius(not diameter) of the your shape to be?");
+                    //if the raidus of the cylinder isn't a interger
+                    if(isNaN(question2) || question2 ==" " || question2 =="  "|| question2 =="   "){
+                        alert("ERROR! Inserted Variable isn't a text.");
+                        switch1=false;//Ends game
+                    //if the raidus of the cylinder is too large to fit the screen
+                    }else if(question2>=(canvas_w/2)-canvas_w/9){
+                        alert("ERROR! The raidus of the your shape is too large!");
+                        question2=0;//prevents canvas from crashing
+                        switch1 = false;//Ends game
+                    }else{
+                        if(switch1==true){
+                            question3 = prompt("What would you like the height of the your shape to be?");
+                            if(isNaN(question3) || question3==" " || question3=="  "|| question3=="   "){
+                                alert("ERROR! Inserted Variable isn't a text.")
+                                switch1=false;//Ends game
+                            }else if(question3>=(canvas_h/2)-canvas_h/9){
+                                alert("ERROR! The height of the your shape is too large!");
+                                question3=0;//prevents canvas from crashing
+                                switch1 = false;//Ends game
+                            }else{
+                                question4 = confirm("Would you like the shapes to rotate by themselves or for you to control them?(Cancel for self rotate; Ok for computer rotates for you)")
+                                if(question4 == true){
+                                    self = false;//Rotates without user 
+                                    cylinder1 = true;//Creates cone
+                                    switch1 = false;//Ends game
+                                }else if(question4 == false){
+                                    orb = false;//user uses mouse to rotate
+                                    cylinder1 = true;//creates cone
+                                    switch1 = false;//Ends game
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    alert("Sorry. That shape isn't registered.");
+                    switch1 = false;
+                }
+            }
+        }
+        function askCanvas(){
+            canvas_h = prompt("What would you like the height of the canvas to be? (Numbers only)");
+            if(isNaN(canvas_h) || canvas_h==" " || canvas_h=="  "|| canvas_h=="   "){
+                alert("ERROR. The value inserted isn't a integer");
+                switch1 = false;
+            }else{
+                canvas_w = prompt("What would you like the width of the canvas to be? (Numbers only)");
+                if(isNaN(canvas_w) || canvas_w==" " || canvas_w=="  "|| canvas_w=="   "){
+                    alert("ERROR. The value inserted isn't a integer");
+                    switch1 = false;
+                }
+            }
+        }
+        function keyPressed(){
+            if(switch1==false){
+                if(keyCode == 69){
+                    switch1 = true;
+                }
+                if(keyCode == 82){
+                    askCanvas();
+                    resizeCanvas(canvas_w,canvas_h);
+                }
+            }
+        }
+        function CubeC(){
+            for(var i=10; i<=20; i++){
+                translate(0, i*10, 0)
+                box(question2, question3,question5);
+            }
+        }
+        function SphereC(){
+            for(var i=10; i<=20; i++){
+                translate(0, i*10, 0)
+                sphere(question2);
+            }
+        }
+        function ConeC(){
+            for(var i=10; i<=20; i++){
+                translate(0, i*10, 0)
+                cone(question2, question3);
+            }
+        }
+        function CylinderC(){
+            for(var i=10; i<=20; i++){
+                translate(0, i*10, 0)
+                cylinder(question2, question3);
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/Jeffreyg2240/p5js/blob/gh-pages/3D-Prim.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas').remove());
+        });
+    </script>
+</body>
+</html>
