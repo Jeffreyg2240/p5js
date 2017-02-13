@@ -3,30 +3,36 @@
     <title>p5js Template</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
     <font color = red>
-    <h2>Click "E" to start to pick and size your shape! Thus clicking "R" can resize the canvas! The code will break off mid way if you don't follow the prompt's instructions</h2>
+    <br size = 10>
+    <h2>Click "E" to start to pick and size your shape! Thus clicking "R" can resize the canvas! The code will break off mid way if you don't follow the prompt's instructions. At times the code will crash, so you will need to refresh instead of pushing "R" and "E".</h2>
     </font>
+    <hr size = 10>
 <head>    
     <script>
     var shape=["cone","sphere","cube","cylinder"];
     var question1, question2, question3, question4,question5;
     var canvas_w;
     var canvas_h;
-    var orb = true;
-    var self = true;
+    var orb = false;
+    var self = false;
     var switch1 = false;
     var cube = false;
     var cone1 = false;
     var sphere1 = false;
     var cylinder1 = false;
-    var expand=0;
+    var ring = [];
+    var skips=0;
         function setup() {
             askCanvas();
             createCanvas(canvas_w,canvas_h,WEBGL);
-            background(255);
+            background(0);
         }
 
         function draw() {
             question();
+            if(skips==10){
+                skips=-10;
+            }
             if(switch1==false){
                 if(orb==true){
                     orbitControl();
@@ -37,12 +43,24 @@
                     rotateY(frameCount * 0.02);
                 }
                 if(sphere1 == true){
+                    cone1=false;
+                    cube=false;
+                    cylinder1=false;
                     SphereC();
-                }else if(cylinder == true){
+                }else if(cylinder1 == true){
+                    cone1=false;
+                    cube=false;
+                    sphere1=false;
                     CylinderC();
                 }else if(cone1==true){
+                    sphere1=false;
+                    cube=false;
+                    cylinder1=false;
                     ConeC();
                 }else if(cube==true){
+                    cone1=false;
+                    sphere1=false;
+                    cylinder1=false;
                     CubeC();
                 }
             }
@@ -60,7 +78,7 @@
                         alert("ERROR! Inserted Variable isn't a text.");
                         switch1=false;//Ends game
                     //if the raidus of the cone is too large to fit the screen
-                    }else if(question2>=(canvas_w/2)-canvas_w/9){
+                    }else if(question2>=(canvas_w/13)){
                         alert("ERROR! The raidus of the your shape is too large!");
                         question2=0;//prevents canvas from crashing
                         switch1 = false;//Ends game
@@ -70,18 +88,18 @@
                             if(isNaN(question3) || question3==" " || question3=="  "|| question3=="   "){
                                 alert("ERROR! Inserted Variable isn't a text.")
                                 switch1=false;//Ends game
-                            }else if(question3>=(canvas_h/2)-canvas_h/9){
+                            }else if(question3>=canvas_h/5){
                                 alert("ERROR! The height of the your shape is too large!");
                                 question3=0;//prevents canvas from crashing
                                 switch1 = false;//Ends game
                             }else{
                                 question4 = confirm("Would you like the shapes to rotate by themselves or for you to control them?(Cancel for self rotate; Ok for computer rotates for you)")
                                 if(question4 == true){
-                                    self = false;//Rotates without user 
+                                    self = true;//Rotates without user 
                                     cone1 = true;//Creates cone
                                     switch1 = false;//Ends game
                                 }else if(question4 == false){
-                                    orb = false;//user uses mouse to rotate
+                                    orb = true;//user uses mouse to rotate
                                     cone1 = true;//creates cone
                                     switch1 = false;//Ends game
                                 }
@@ -95,8 +113,8 @@
                     if(isNaN(question2) || question2 ==" " || question2 =="  "|| question2 =="   "){
                         alert("ERROR! Inserted Variable isn't a text.");
                         switch1=false;//Ends game
-                    //if the raidus of the cone is too large to fit the screen
-                    }else if(question2>=(canvas_w/2)-canvas_w/9){
+                    //if the raidus of the sphere is too large to fit the screen
+                    }else if(question2>=canvas_w/8){
                         alert("ERROR! The raidus of the your shape is too large!");
                         question2=0;//prevents canvas from crashing
                         switch1 = false;//Ends game
@@ -121,27 +139,30 @@
                         alert("ERROR! Inserted Variable isn't a text.");
                         switch1=false;//Ends game
                     //if the width of the box is too large to fit the screen
-                    }else if(question2>=(canvas_w/2)-canvas_w/9){
+                    }else if(question2>=canvas_w/8){
                         alert("ERROR! The raidus of the your shape is too large!");
                         question2=0;//prevents canvas from crashing
                         switch1 = false;//Ends game
                     }else{
+                        //Cube
                         if(switch1==true){
                             question3 = prompt("What would you like the height of the your shape to be?");
                             if(isNaN(question3) || question3==" " || question3=="  "|| question3=="   "){
                                 alert("ERROR! Inserted Variable isn't a text.")
                                 switch1=false;//Ends game
-                            }else if(question3>=(canvas_h/2)-canvas_h/9){
+                                //if the inserted variable was a cube was too large
+                            }else if(question3>=canvas_h/8){
                                 alert("ERROR! The height of the your shape is too large!");
                                 question3=0;//prevents canvas from crashing
                                 switch1 = false;//Ends game
+                                //Depth of cube
                             }else{
                                 question5 = prompt("What would you like the depth of the your shape to be?");
                                 if(isNaN(question5) || question5==" " || question5=="  "|| question5=="   "){
                                     alert("ERROR! Inserted Variable isn't a text.")
                                     switch1=false;//Ends game
-                                }else if(question5>=(canvas_h/2)-canvas_h/9){
-                                    alert("ERROR! The height of the your shape is too large!");
+                                }else if(question5>=(canvas_h/8)){
+                                    alert("ERROR! The depth of the your shape is too large!");
                                     question5=0;//prevents canvas from crashing
                                     switch1 = false;//Ends game
                                 }else{
@@ -200,7 +221,19 @@
                 }
             }
         }
+        function reset(){
+            orb = true;
+            self = true;
+            switch1 = false;
+            cube = false;
+            cone1 = false;
+            sphere1 = false;
+            cylinder1 = false;
+            rings=[];
+            skips=0;
+        }
         function askCanvas(){
+            //user is able to create canvas and also resize the canvas
             canvas_h = prompt("What would you like the height of the canvas to be? (Numbers only)");
             if(isNaN(canvas_h) || canvas_h==" " || canvas_h=="  "|| canvas_h=="   "){
                 alert("ERROR. The value inserted isn't a integer");
@@ -216,6 +249,7 @@
         function keyPressed(){
             if(switch1==false){
                 if(keyCode == 69){
+                    reset();
                     switch1 = true;
                 }
                 if(keyCode == 82){
@@ -225,35 +259,110 @@
             }
         }
         function CubeC(){
-            for(var i=10; i<=20; i++){
-                translate(0, i*10, 0)
-                box(question2, question3,question5);
+            background(255);
+            var radius = width * 1.5;
+            for(var i=0; i<ring.length; i++){
+                ring[i].display();
+            }
+            for(var i = 0; i <= 15; i++){
+                for(var j = 0; j <= 15; j++){
+                    push();
+                    var a = j/12 * PI;
+                    var b = i/12 * PI;
+                    translate(sin(2 * a) * radius * sin(b), cos(b) * radius / 2 , cos(2 * a) * radius * sin(b));    
+                    if(j%2 === 0){
+                        box(question2,question3,question5);
+                    }else{
+                        box(question2,question3,question5);
+                    }
+                    pop();
+                }
             }
         }
         function SphereC(){
-            for(var i=10; i<=20; i++){
-                translate(0, i*10, 0)
-                sphere(question2);
+            background(255);
+            var radius = width * 1.5;
+            for(var i=0; i<ring.length; i++){
+                ring[i].display();
+            }
+            for(var i = 0; i <= 15; i++){
+                for(var j = 0; j <= 15; j++){
+                    push();
+                    var a = j/12 * PI;
+                    var b = i/12 * PI;
+                    translate(sin(2 * a) * radius * sin(b), cos(b) * radius / 2 , cos(2 * a) * radius * sin(b));    
+                    if(j%2 === 0){
+                        sphere(question2);
+                    }else{
+                        sphere(question2);
+                    }
+                    pop();
+                }
             }
         }
         function ConeC(){
-            for(var i=10; i<=20; i++){
-                translate(0, i*10, 0)
-                cone(question2, question3);
+            background(255);
+            var radius = width * 1.5;
+            for(var i=0; i<ring.length; i++){
+                ring[i].display();
+            }
+            for(var i = 0; i <= 10; i++){
+                for(var j = 0; j <= 10; j++){
+                    push();
+                    var a = j/12 * PI;
+                    var b = i/12 * PI;
+                    translate(sin(2 * a) * radius * sin(b), cos(b) * radius / 2 , cos(2 * a) * radius * sin(b));    
+                    if(j%2 === 0){
+                        cone(question2,question3*2);
+                    }else{
+                        cone(question2,question3*2);
+                    }
+                    pop();
+                }
             }
         }
         function CylinderC(){
-            for(var i=10; i<=20; i++){
-                translate(0, i*10, 0)
-                cylinder(question2, question3);
+            background(255);
+            var radius = width * 1.5;
+            for(var i=0; i<ring.length; i++){
+                ring[i].display();
             }
-            
+            for(var i = 0; i <= 10; i++){
+                for(var j = 0; j <= 13 ; j++){
+                    push();
+                    var a = j/12 * PI;
+                    var b = i/12 * PI;
+                    translate(sin(2 * a) * radius * sin(b), cos(b) * radius / 2 , cos(2 * a) * radius * sin(b));    
+                    if(j%2 === 0){
+                        cylinder(question2,question3*1.5);
+                    }else{
+                        cylinder(question2,question3*1.5);
+                    }
+                    pop();
+                }
+            }
         }
+        function Ring(x,y,d){
+            this.x = x;
+            this.y = y;
+            this.d = d;
+            this.display = function(){
+                translate(0,0,d);
+                torus(this.x,this.y);
+                translate(0,0,-d);
+            }
+        } 
+      
+      function mousePressed(){
+          skips+=1;
+          ring.push(new Ring(canvas_h-canvas_h/15,25,100*skips));
+
+      }
     </script>
 </head>
-<body>
+<body style="background-color:#00FFFF;">
     <div id="code" class="container-fluid">
-        <script src="https://gist-it.appspot.com/github/jeffreyg2240/p5js/blob/gh-pages/Objects.html?footer=0"></script>
+        <script src="https://gist-it.appspot.com/github/Jeffreyg2240/p5js/blob/gh-pages/Objects.html?footer=0"></script>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
