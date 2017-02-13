@@ -35,9 +35,11 @@
             }
             if(switch1==false){
                 if(orb==true){
+                    self=false
                     orbitControl();
                 }
-                if(self==true){
+                if(self==false){
+                    orb=false
                     rotateZ(frameCount * 0.02);
                     rotateX(frameCount * 0.02);
                     rotateY(frameCount * 0.02);
@@ -261,6 +263,7 @@
         function CubeC(){
             background(255);
             var radius = width * 1.5;
+            translate(0,0,-canvas_w);
             for(var i=0; i<ring.length; i++){
                 ring[i].display();
             }
@@ -282,6 +285,7 @@
         function SphereC(){
             background(255);
             var radius = width * 1.5;
+            translate(0,0,-canvas_w);
             for(var i=0; i<ring.length; i++){
                 ring[i].display();
             }
@@ -303,6 +307,7 @@
         function ConeC(){
             background(255);
             var radius = width * 1.5;
+            translate(0,0,-canvas_w);
             for(var i=0; i<ring.length; i++){
                 ring[i].display();
             }
@@ -324,6 +329,7 @@
         function CylinderC(){
             background(255);
             var radius = width * 1.5;
+            translate(0,0,-canvas_w);
             for(var i=0; i<ring.length; i++){
                 ring[i].display();
             }
@@ -354,6 +360,7 @@
         } 
       
       function mousePressed(){
+          background(255);
           skips+=1;
           ring.push(new Ring(canvas_h-canvas_h/15,25,100*skips));
 
