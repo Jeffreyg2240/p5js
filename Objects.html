@@ -38,7 +38,7 @@
                     self=false
                     orbitControl();
                 }
-                if(self==false){
+                if(self==true){
                     orb=false
                     rotateZ(frameCount * 0.02);
                     rotateX(frameCount * 0.02);
@@ -123,11 +123,11 @@
                     }else{
                         question4 = confirm("Would you like the shapes to rotate by themselves or for you to control them?(Cancel for self rotate; Ok for computer rotates for you)")
                         if(question4 == true){
-                            self = false;//Rotates without user 
+                            self = true;//Rotates without user 
                             sphere1 = true;//Creates sphere
                             switch1 = false;//Ends game
                         }else if(question4 == false){
-                            orb = false;//user uses mouse to rotate
+                            orb = true;//user uses mouse to rotate
                             sphere1 = true;//creates sphere 
                             switch1 = false;//Ends game
                         }
