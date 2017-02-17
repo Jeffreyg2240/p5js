@@ -22,24 +22,37 @@
     var cylinder1 = false;
     var ring = [];
     var skips=0;
+    var image1, image2;
+        function preload(){
+            //loads 3 image
+            image1 = loadImage('Nyan');
+            image2 = loadImage('Doge');
+        }
         function setup() {
             askCanvas();
+            //3d canvas
             createCanvas(canvas_w,canvas_h,WEBGL);
+            //black background
             background(0);
         }
 
         function draw() {
+            cone(100,100)
+            //asks the user questions to make the shape
             question();
             if(skips==10){
+                //helps the torus loop
                 skips=-10;
             }
             if(switch1==false){
                 if(orb==true){
                     self=false
+                    //user can control the orbit
                     orbitControl();
                 }
                 if(self==true){
                     orb=false
+                    //shape rotates
                     rotateZ(frameCount * 0.02);
                     rotateX(frameCount * 0.02);
                     rotateY(frameCount * 0.02);
@@ -48,21 +61,26 @@
                     cone1=false;
                     cube=false;
                     cylinder1=false;
+                    //display image
+                    texture(image2);
                     SphereC();
                 }else if(cylinder1 == true){
                     cone1=false;
                     cube=false;
                     sphere1=false;
+                    texture(image1);
                     CylinderC();
                 }else if(cone1==true){
                     sphere1=false;
                     cube=false;
                     cylinder1=false;
+                    texture(image1);
                     ConeC();
                 }else if(cube==true){
                     cone1=false;
                     sphere1=false;
                     cylinder1=false;
+                    texture(image1);
                     CubeC();
                 }
             }
@@ -77,10 +95,10 @@
                     question2 = prompt("What would you like the radius(not diameter) of the your shape to be?");
                     //if the raidus of the cone isn't a interger
                     if(isNaN(question2) || question2 ==" " || question2 =="  "|| question2 =="   "){
-                        alert("ERROR! Inserted Variable isn't a text.");
+                        alert("ERROR! Inserted Variable isn't a variable.");
                         switch1=false;//Ends game
                     //if the raidus of the cone is too large to fit the screen
-                    }else if(question2>=(canvas_w/13)){
+                    }else if(question2>=(canvas_w/12)){
                         alert("ERROR! The raidus of the your shape is too large!");
                         question2=0;//prevents canvas from crashing
                         switch1 = false;//Ends game
@@ -92,7 +110,7 @@
                                 switch1=false;//Ends game
                             }else if(question3>=canvas_h/5){
                                 alert("ERROR! The height of the your shape is too large!");
-                                question3=0;//prevents canvas from crashing
+                                //question3=0;//prevents canvas from crashing
                                 switch1 = false;//Ends game
                             }else{
                                 question4 = confirm("Would you like the shapes to rotate by themselves or for you to control them?(Cancel for self rotate; Ok for computer rotates for you)")
@@ -363,8 +381,7 @@
           background(255);
           skips+=1;
           ring.push(new Ring(canvas_h-canvas_h/15,25,100*skips));
-
-      }
+        }
     </script>
 </head>
 <body style="background-color:#00FFFF;">
