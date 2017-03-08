@@ -13,6 +13,9 @@
     var picker;
     var times;
     var mili;
+    var Joe;
+        function preload(){
+            Joe = loadImage("JM.jpg");
         function setup() {
             createCanvas(600,600);
             textSize(25);
@@ -30,6 +33,7 @@
             }
             if(start==true){
                     if(mili>= millis()){
+                        fill(Joe);
                         if(picker==1){
                             rect(0,0,200,200);
                         }else if(picker==2){
