@@ -13,16 +13,12 @@
     var picker;
     var times;
     var mili;
-    var Joe;
-        function preload(){
-            img = loadImage("JM.jpg");
-        }
         function setup() {
             createCanvas(600,600);
             textSize(25);
             text("Tap the coin to start", 280,300);
             picker = floor(random(1,10));
-            mili=millis()+1000;
+            mili=millis()+750;
         }
 
         function draw() {
@@ -33,7 +29,7 @@
                 Win();
             }
             if(start==true){
-                    if(mili>= millis()){
+                                        if(mili>= millis()){
                         if(picker==1){
                             image(img,0,0,200,200);
                         }else if(picker==2){
@@ -57,15 +53,17 @@
                         stroke(255,255,0);
                         text("Score: "+score,30,50)
                         fill(0);
+                        noStroke();
                     }else{
                         picker=floor(random(1,9));
                         grid(0,200,400,600);
                         stroke(255,255,0);
                         score--;
                         text("Score: "+score,30,50);
+                        noStroke();
                     }
             }
- }
+        }
         function grid(x1,x2,x3,x4){
             clear();
             stroke(0);
@@ -74,7 +72,7 @@
             line(x2,x1,x2,x4);
             line(x1,x3,x4,x3);
             line(x3,x1,x3,x4);
-            mili = millis()+1000;
+            mili = millis()+750;
         }
         function GameOver(){
             start = false;
@@ -175,7 +173,6 @@
         }
     </script>
 </head>
-
 <body>
     <div id="code" class="container-fluid">
         <script src="https://gist-it.appspot.com/github/jeffreyg2240/p5js/blob/gh-pages/MakeyMakey.html?footer=0"></script>
