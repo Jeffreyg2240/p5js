@@ -17,8 +17,8 @@
             createCanvas(600,600);
             textSize(25);
             text("Tap the coin to start", 280,300);
-            picker = floor(random(1,9));
-            mili=millis()+1500;
+            picker = floor(random(1,10));
+            mili=millis()+750;
         }
 
         function draw() {
@@ -41,7 +41,7 @@
                         }else if(picker==5){
                             rect(200,200,200,200);
                         }else if(picker==6){
-                            rect(200,400,200,200);
+                            rect(400,200,200,200);
                         }else if(picker==7){
                             rect(0,400,200,200);
                         }else if(picker==8){
@@ -58,12 +58,11 @@
                         picker=floor(random(1,9));
                         grid(0,200,400,600);
                         stroke(255,255,0);
-                        //score--;
+                        score--;
                         text("Score: "+score,30,50);
                         noStroke();
                     }
             }
-            console.log(mili);
         }
         function grid(x1,x2,x3,x4){
             clear();
@@ -73,7 +72,7 @@
             line(x2,x1,x2,x4);
             line(x1,x3,x4,x3);
             line(x3,x1,x3,x4);
-            mili = millis()+1500;
+            mili = millis()+750;
         }
         function GameOver(){
             start = false;
@@ -105,59 +104,59 @@
         }
        function keyPressed(){
            if(start==true){
-               if(keyCode==87){
+               if(keyCode==87|| keyCode==103){
                   if(picker==1){//w
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==65){//a
+               }else if(keyCode==65|| keyCode==104){//a
                    if(picker==2){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==83){//s
+               }else if(keyCode==83|| keyCode==105){//s
                    if(picker==3){
                        reset();
                    }else{
                        GameOver();
                    }
                    
-                }else if(keyCode==68){//d
+                }else if(keyCode==68|| keyCode==100){//d
                    if(picker==4){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==70){//f
+               }else if(keyCode==70|| keyCode==101){//f
                    if(picker==5){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==39){
+               }else if(keyCode==39|| keyCode==102){
                     //right arrow
                    if(picker==6){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==40){
+               }else if(keyCode==40|| keyCode==97){
                    //down arrow
                    if(picker==7){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==38){
+               }else if(keyCode==38 || keyCode==98){
                    //up arrow
                    if(picker==8){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==37){
+               }else if(keyCode==37|| keyCode==99){
                    //left arrow
                    if(picker==9){
                        reset();
@@ -168,13 +167,13 @@
             }
             function reset(){
                 score++;
-                picker=floor(random(1,9));
+                picker=floor(random(1,10));
                 grid(0,200,400,600);
             }
         }
     </script>
 </head>
-<body>
+<body background>
     <div id="code" class="container-fluid">
         <script src="https://gist-it.appspot.com/github/jeffreyg2240/p5js/blob/gh-pages/MakeyMakey.html?footer=0"></script>
     </div>
