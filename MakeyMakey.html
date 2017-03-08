@@ -34,31 +34,30 @@
             }
             if(start==true){
                     if(mili>= millis()){
-                        texture(Joe);
                         if(picker==1){
-                            rect(0,0,200,200);
+                            image(Joe,0,0,200,200);
                         }else if(picker==2){
-                            rect(200,0,200,200);
+                            image(Joe,0,200,200);
                         }else if(picker==3){
-                            rect(400,0,200,200);
+                            image(Joe,0,200,200);
                         }else if(picker==4){
-                            rect(0,200,200,200);
+                            Image(Joe,200,200,200);
                         }else if(picker==5){
-                            rect(200,200,200,200);
+                            image(Joe,200,200,200);
                         }else if(picker==6){
-                            rect(400,200,200,200);
+                            image(Joe,200,200,200);
                         }else if(picker==7){
-                            rect(0,400,200,200);
+                            image(Joe,400,200,200);
                         }else if(picker==8){
-                            rect(200,400,200,200);
+                            image(Joe,400,200,200);
                         }else if(picker==9){
-                            rect(400,400,200,200);
+                            image(Joe,400,200,200);
                         }
-                        fill(0);
                         textSize(25);
                         stroke(255,255,0);
                         text("Score: "+score,30,50)
                         noStroke();
+                        fill(0);
                     }else{
                         picker=floor(random(1,9));
                         grid(0,200,400,600);
