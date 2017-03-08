@@ -15,7 +15,7 @@
     var mili;
     var Joe;
         function preload(){
-            Joe = loadImage("JM.jpg");
+            img = loadImage("JM.jpg");
         }
         function setup() {
             createCanvas(600,600);
@@ -35,23 +35,23 @@
             if(start==true){
                     if(mili>= millis()){
                         if(picker==1){
-                            image(Joe,0,0,200,200);
+                            image(img,0,0,200,200);
                         }else if(picker==2){
-                            image(Joe,0,200,200);
+                            image(img,200,0,200,200);
                         }else if(picker==3){
-                            image(Joe,0,200,200);
+                            image(img,400,0,200,200);
                         }else if(picker==4){
-                            Image(Joe,200,200,200);
+                            Image(img,0,200,200,200);
                         }else if(picker==5){
-                            image(Joe,200,200,200);
+                            image(img,200,200,200,200);
                         }else if(picker==6){
-                            image(Joe,200,200,200);
+                            image(img,400,200,200,200);
                         }else if(picker==7){
-                            image(Joe,400,200,200);
+                            image(img,0,400,200,200);
                         }else if(picker==8){
-                            image(Joe,400,200,200);
+                            image(img,200,400,200,200);
                         }else if(picker==9){
-                            image(Joe,400,200,200);
+                            image(img,400,400,200,200);
                         }
                         textSize(25);
                         stroke(255,255,0);
