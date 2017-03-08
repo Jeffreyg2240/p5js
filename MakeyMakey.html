@@ -34,7 +34,7 @@
             }
             if(start==true){
                     if(mili>= millis()){
-                        fill(Joe);
+                        texture(Joe);
                         if(picker==1){
                             rect(0,0,200,200);
                         }else if(picker==2){
@@ -54,10 +54,10 @@
                         }else if(picker==9){
                             rect(400,400,200,200);
                         }
+                        fill(0);
                         textSize(25);
                         stroke(255,255,0);
                         text("Score: "+score,30,50)
-                        fill(0);
                         noStroke();
                     }else{
                         picker=floor(random(1,9));
