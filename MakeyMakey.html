@@ -22,7 +22,7 @@
             textSize(25);
             text("Tap the coin to start", 280,300);
             picker = floor(random(1,10));
-            mili=millis()+750;
+            mili=millis()+1000;
         }
 
         function draw() {
@@ -33,7 +33,7 @@
                 Win();
             }
             if(start==true){
-                    if(mili>= millis()){
+                    if(mili>= millis()-250){
                         if(picker==1){
                             image(img,0,0,200,200);
                         }else if(picker==2){
@@ -76,7 +76,7 @@
             line(x2,x1,x2,x4);
             line(x1,x3,x4,x3);
             line(x3,x1,x3,x4);
-            mili = millis()+750;
+            mili = millis()+1000;
         }
         function GameOver(){
             start = false;
