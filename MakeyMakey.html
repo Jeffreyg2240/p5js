@@ -14,10 +14,8 @@
     var times;
     var mili;
     var img;
-        function preload(){
-            img = loadImage("JM.jpg");
-        }
         function setup() {
+            img = loadImage("JM.jpg")
             createCanvas(600,600);
             textSize(25);
             text("Tap the coin to start", 280,300);
@@ -26,6 +24,7 @@
         }
 
         function draw() {
+            
             if(score==-3){
                 GameOver();
             }
@@ -108,59 +107,59 @@
         }
        function keyPressed(){
            if(start==true){
-               if(keyCode==87|| keyCode==103){
+               if(keyCode==87|| key==7){
                   if(picker==1){//w
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==65|| keyCode==104){//a
+               }else if(keyCode==65|| key==8){//a
                    if(picker==2){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==83|| keyCode==105){//s
+               }else if(keyCode==83|| key==9){//s
                    if(picker==3){
                        reset();
                    }else{
                        GameOver();
                    }
                    
-                }else if(keyCode==68|| keyCode==100){//d
+                }else if(keyCode==68|| key==4){//d
                    if(picker==4){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==70|| keyCode==101){//f
+               }else if(keyCode==70|| key==5){//f
                    if(picker==5){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==39|| keyCode==102){
+               }else if(keyCode==39|| key==6){
                     //right arrow
                    if(picker==6){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==40|| keyCode==97){
+               }else if(keyCode==40|| key==1){
                    //down arrow
                    if(picker==7){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==38 || keyCode==98){
+               }else if(keyCode==38 || keyCode==2){
                    //up arrow
                    if(picker==8){
                        reset();
                    }else{
                        GameOver();
                    }
-               }else if(keyCode==37|| keyCode==99){
+               }else if(keyCode==37|| key==3){
                    //left arrow
                    if(picker==9){
                        reset();
